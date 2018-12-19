@@ -14,7 +14,7 @@ for db in $databases; do
 	echo "Dumping database: $db"
 	mysqldump --force --opt --user=$USER --password=$PASSWORD --databases $db > $OUTPUT/`date +%Y%m%d`.$db.sql
 	gzip --force $OUTPUT/`date +%Y%m%d`.$db.sql
-	/usr/bin/aws s3 cp /path/to/backup/directory s3://aws-bucket-name --recursive
-	rm -rf /path/to/backup/directory/*.gz
+	/usr/bin/aws s3 cp $OUTPUT s3://aws-bucket-name --recursive
+	rm -rf $OUTPUT/*.gz
     fi
 done
